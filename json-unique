@@ -1,0 +1,6 @@
+#!/usr/bin/env jq --stream -n 
+
+reduce fromstream(1|truncate_stream(inputs)) as $item (
+    {};
+    $item.MeterId as $val | if has($val) | not then .[$val] = true else . end
+) | keys[]
