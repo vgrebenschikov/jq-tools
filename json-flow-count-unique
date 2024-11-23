@@ -1,0 +1,6 @@
+#!/opt/local/bin/jq -n -f
+
+reduce inputs as $item (
+    {};
+    ($item[$key] | tostring) as $val | if has($val) | not then .[$val] = true else . end
+) | keys[] | length
