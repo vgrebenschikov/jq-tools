@@ -132,3 +132,8 @@ reduce inputs as $item (
     $item.name as $val | if has($val) | not then .[$val] = true else . end
 ) | keys[]
 ```
+
+### Hex/Oct/etc conversions
+
+[External JQ library](https://gist.github.com/wader/694fcc7d0184661a5c7a397530258cfc)
+
