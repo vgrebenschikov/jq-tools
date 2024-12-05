@@ -1,4 +1,4 @@
-#!/usr/bin/jq -Rn -r -f
+#!/usr/bin/env jq -Rn -r -f
 
 def objectify(headers):
   def tonumberq: tonumber? // .;
@@ -10,7 +10,7 @@ def trim:
 
 def csvsplit:
   [
-    sub("\n";"") | sub("\r";"")
+    sub("^\uFEFF"; "") | sub("\n";"") | sub("\r";"")
     | scan("(\"(?:[^\"]*(?:\"\"[^\"]*)*)\"|(?:[^,]+)|(?<=,)(?=,))")
     | if . == "" then . else .[0] end
   ];
@@ -18,11 +18,8 @@ def csvsplit:
 def csv2table:
   csvsplit | map(trim);
 
-def headers:
-  csv2table | map(gsub("\"";""));  # additional cut quotes from header due to bug in first regexp match
-
 def csv2json:
-  first(inputs) | headers as $headers |
+  first(inputs) | csv2table as $headers |
   first(inputs) | csv2table | objectify($headers) | tostring,
   "," + (inputs | select(length > 0) | csv2table | objectify($headers) | tostring);
 
