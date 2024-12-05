@@ -1,4 +1,4 @@
-#!/usr/bin/jq -Rn -f 
+#!/usr/bin/jq -Rn -f
 
 def objectify(headers):
   def tonumberq: tonumber? // .;
