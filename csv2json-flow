@@ -6,10 +6,10 @@ def objectify(headers):
   | reduce range(0; headers|length) as $i ({}; .[headers[$i]] = ($in[$i] | tonumberq) );
 
 def trim:
-  sub("\n";"") | sub("\r";"") | sub("^ +";"") | sub(" +$";"") | sub("^\"";"") | sub("\"$";"") | gsub("\\\\";"");
+  sub("\n";"") | sub("\r";"") | sub("^ +";"") | sub(" +$";"") | sub("^\"";"") | sub("\"$";"") | gsub("\"\"";"\"");
 
 def csvsplit:
-  [scan("(?<a>(?:[^,\"])+|(?:\"(?:[^\"\\\\]|\\\\.)*\")|(?<=,))+")|if . == "" then . else .[0] end];
+  [scan("(\"(?:[^\"]*(?:\"\"[^\"]*)*)\"|(?:[^,]+)|(?<=,)(?=,))")|if . == "" then . else .[0] end];
 
 def csv2table:
   csvsplit | map(trim);

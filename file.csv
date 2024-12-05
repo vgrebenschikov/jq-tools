@@ -1,5 +1,5 @@
 "age","city","name","complex1","complex2","next"
-"Alice","30","New York","comma -,- in line", "quote -\"- in line","the next"
-"Bob","25","San Francisco","{ \"a\": 1, \"b\": 2 }","[ 1, 2, 3, 4, 5 ]", "the next"
+"Alice","30","New York","comma -,- in line", "quote -""- in line","the next"
+"Bob","25","San Francisco","{ ""a"": 1, ""b"": 2 }","[ 1, 2, 3, 4, 5 ]", "the next"
 "Charlie","35","Los Angeles","","","the next"
 "Bravo","11","Dallas",,,"the next"
