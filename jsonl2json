@@ -1,0 +1,8 @@
+#!/usr/bin/env jq -n -r -f
+
+def jsonl2json:
+  first(inputs) | tostring,
+  (inputs | "," + tostring);
+
+
+"[", jsonl2json, "]"
