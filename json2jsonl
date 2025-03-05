@@ -1,0 +1,5 @@
+#!/usr/bin/env jq -nc --stream -f
+
+def stream_array: fromstream(1 | truncate_stream(inputs));
+
+stream_array
