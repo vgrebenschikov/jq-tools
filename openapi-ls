@@ -1,0 +1,4 @@
+#!/usr/bin/env jq -r -f
+
+.paths | to_entries[] |. as $e 
+	| ($e.value | keys[] | ( (.|ascii_upcase) + "\t" + $e.key) )
